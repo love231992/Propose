@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For My Sinha ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 350px;
+        }
+
+        h1 {
+            color: #ff4d6d;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            position: relative;
+            height: 60px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background: #ccc;
+            color: #333;
+            position: absolute;
+            left: 140px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="proposalCard">
+    <h1>Hey Sinha ❤️</h1>
+    <p>
+        From smiles to fights,<br>
+        from talks to silence,<br><br>
+        every moment with you is special 💕<br><br>
+        Priya, will you be my Valentine? 🌹
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 🙈</button>
+    </div>
+</div>
+
+<div class="card hidden" id="successCard">
+    <h1>YAYYYYY 🎉💃</h1>
+    <p>
+        I knew it Sinha 😍<br><br>
+        Happy Valentine’s Week ❤️<br>
+        You just made me the happiest person alive!
+    </p>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const proposalCard = document.getElementById("proposalCard");
+    const successCard = document.getElementById("successCard");
+    const heartsContainer = document.getElementById("hearts");
+
+    const noTexts = [
+        "Are you sure? 😏",
+        "Think again 😜",
+        "Nice try 😈",
+        "No is disabled 😂",
+        "Just say YES ❤️"
+    ];
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 250;
+        const y = Math.random() * 40;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+        noBtn.innerText = noTexts[Math.floor(Math.random() * noTexts.length)];
+    });
+
+    yesBtn.addEventListener("click", () => {
+        proposalCard.classList.add("hidden");
+        successCard.classList.remove("hidden");
+        startHearts();
+    });
+
+    function startHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 15 + "px";
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
