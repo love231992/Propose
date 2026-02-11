@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Promise Day 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        max-width: 380px;
+    }
+
+    h1 {
+        color: #ff4d6d;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 17px;
+        color: #333;
+    }
+
+    .promise {
+        background: #ffe6ea;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .promise:hover {
+        background: #ffccd5;
+        transform: scale(1.05);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        background: #ff4d6d;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="mainCard">
+    <h1>Happy Promise Day 💍</h1>
+    <p>
+        Hey Priya ❤️<br>
+        My lovely Sinha 😘<br><br>
+        Today I don’t have gifts…  
+        I have **promises** 🤞
+    </p>
+
+    <div class="promise" onclick="reveal(0)">💖 Tap for my first promise</div>
+    <div class="promise hidden" onclick="reveal(1)">💖 Tap for my second promise</div>
+    <div class="promise hidden" onclick="reveal(2)">💖 Tap for my third promise</div>
+    <div class="promise hidden" onclick="reveal(3)">💖 One last promise…</div>
+</div>
+
+<div class="card hidden" id="finalCard">
+    <h1>Forever Starts Here ❤️</h1>
+    <p>
+        Sinha,<br><br>
+        I promise to choose you<br>
+        every single day 💕<br><br>
+        Not because life is perfect,<br>
+        but because **you are worth it** 😘
+    </p>
+    <button onclick="startHearts()">I Promise 💍</button>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+    const promises = [
+        "I promise to annoy you… but love you even more 😜",
+        "I promise to stand by you, even on your worst days 🤗",
+        "I promise to laugh with you, cry with you, grow with you 💕",
+        "I promise that no matter what… you are my person ❤️"
+    ];
+
+    let index = 0;
+
+    function reveal(i) {
+        document.querySelectorAll(".promise")[i].innerText = promises[i];
+        document.querySelectorAll(".promise")[i].style.background = "#ffb3c1";
+
+        if (i + 1 < document.querySelectorAll(".promise").length) {
+            document.querySelectorAll(".promise")[i + 1].classList.remove("hidden");
+        } else {
+            setTimeout(() => {
+                document.getElementById("mainCard").classList.add("hidden");
+                document.getElementById("finalCard").classList.remove("hidden");
+            }, 800);
+        }
+    }
+
+    function startHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 15 + "px";
+            document.getElementById("hearts").appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
