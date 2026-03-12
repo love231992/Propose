@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Question For You ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#ff758c,#ff7eb3);
+height:100vh;
+overflow:hidden;
+color:white;
+text-align:center;
+}
+
+.container{
+margin-top:120px;
+padding:20px;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:12px;
+margin:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#start{
+background:white;
+color:#ff4d6d;
+font-weight:bold;
+}
+
+#yes{
+background:#2ecc71;
+color:white;
+}
+
+#no{
+background:#e74c3c;
+color:white;
+position:relative;
+}
+
+#story{
+font-size:28px;
+margin:40px;
+min-height:60px;
+}
+
+.hidden{
+display:none;
+}
+
+/* hearts */
+
+.heart{
+position:absolute;
+font-size:24px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+opacity:1;
+}
+to{
+transform:translateY(-10vh);
+opacity:0;
+}
+}
+
+/* confetti */
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:white;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-10vh) rotate(0deg);
+}
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Hey You ❤️</h1>
+
+<div id="story">I made something for you...</div>
+
+<button id="start" onclick="startStory()">Click here</button>
+
+<div id="question" class="hidden">
+
+<h2>Before anything else...</h2>
+
+<p>I just want to say I'm really sorry if I upset you 😔</p>
+
+<p>You mean a lot to me.</p>
+
+<h2>So I have one important question...</h2>
+
+<h1>Will you be my girlfriend? 💕</h1>
+
+<button id="yes" onclick="yesClicked()">Yes ❤️</button> <button id="no" onclick="noClicked()">No 🙈</button>
+
+</div>
+
+<div id="result" class="hidden">
+
+<h1>You just made me the happiest person alive 💖</h1>
+<h2>I promise to make you smile every day 😊</h2>
+
+</div>
+
+</div>
+
+<script>
+
+let messages=[
+"I know you might be mad at me...",
+"But I couldn't just text you something boring...",
+"So I made this little page for you 😅",
+"Because you are special to me ❤️",
+"And I wanted to ask you something important..."
+];
+
+let index=0;
+
+function startStory(){
+
+document.getElementById("start").style.display="none";
+
+let story=document.getElementById("story");
+
+let interval=setInterval(()=>{
+
+story.innerText=messages[index];
+
+index++;
+
+if(index===messages.length){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+document.getElementById("question").classList.remove("hidden");
+},1500);
+
+}
+
+},2000);
+
+}
+
+function yesClicked(){
+
+document.getElementById("question").classList.add("hidden");
+document.getElementById("result").classList.remove("hidden");
+
+startHearts();
+startConfetti();
+
+}
+
+let noCount=0;
+
+function noClicked(){
+
+let btn=document.getElementById("no");
+
+let texts=[
+"Are you sure? 😢",
+"Think again 🙈",
+"I'll bring snacks 🍫",
+"I'll say sorry again 😭",
+"Ok that hurts 💔",
+"Last chance 😅"
+];
+
+btn.innerText=texts[Math.min(noCount,texts.length-1)];
+
+noCount++;
+
+btn.style.position="absolute";
+
+btn.style.left=Math.random()*window.innerWidth+"px";
+btn.style.top=Math.random()*window.innerHeight+"px";
+
+}
+
+function startHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),5000);
+
+},200);
+
+}
+
+function startConfetti(){
+
+setInterval(()=>{
+
+let c=document.createElement("div");
+
+c.classList.add("confetti");
+
+c.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),4000);
+
+},100);
+
+}
+
+</script>
+
+</body>
+</html>
